@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nybodahallen</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #webcam-canvas {
+            max-width: 80%;
+            height: auto;
+        }
+    </style>
+    <script>
+        function updateImage() {
+            var now = new Date();
+            var img = new Image();
+            img.src = "/output.png?" + now.getTime();
+            img.onload = function() {
+                var canvas = document.getElementById('webcam-canvas');
+                var ctx = canvas.getContext('2d');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+            };
+        }
+        setInterval(updateImage, 1000);
+    </script>
+</head>
+<body onload="updateImage()">
+    <h1>Nybodahallen</h1>
+    <a href="https://sv.wikipedia.org/wiki/Nybodadep%C3%A5n" style="margin-botton: 1rem">Läs mer om Nybodahallen på Wikipedia</a>
+    <canvas id="webcam-canvas"></canvas>
+</body>
+</html>
