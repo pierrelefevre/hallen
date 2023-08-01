@@ -23,6 +23,20 @@ def serve_image():
         return send_file(latest_image_path, mimetype='image/png')
     except Exception as e:
         return str(e)
+    
+@app.route('/favicon.ico')
+def serve_icon():
+    try:
+        return send_file("/home/pi/hallen/favicon.ico", mimetype='image/x-icon')
+    except Exception as e:
+        return str(e)
+    
+@app.route('/sl.ttf')
+def serve_font():
+    try:
+        return send_file("/home/pi/hallen/sl.ttf", mimetype='font/ttf')
+    except Exception as e:
+        return str(e)
 
 if __name__ == "__main__":
     thread = threading.Thread(target=capture_image, daemon=True)
