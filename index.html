@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="preload" href="" as="slgothic" type="font/woff2" crossorigin>
+    <meta name="viewport" content="initial-scale=1" />
     <title>Nybodahallen</title>
     <style>
+        @font-face {
+            font-family: "SL";
+            src: url(https://cdne-frag-c646b3805017568f.azureedge.net/sg/4.8.3/slgothictext2-bold.woff2);
+        }
+        *{
+            font-family: 'SL', sans-serif;
+            color: white;
+        }
+
         body {
             text-align: center;
-            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #000;
         }
         #webcam-canvas {
             max-width: 80%;
             height: auto;
+            margin: 2rem;
+        }
+        p{
+            max-width: 960px;
+            text-align: justify;
+            font-size: 20px;
+            margin: 2rem;
+            line-height: 1.2;
+        }
+        @media (max-width: 960px) {
+            p{
+                text-align: left;
+                font-size: 18px;
+            }
         }
     </style>
     <script>
@@ -30,7 +58,7 @@
 </head>
 <body onload="updateImage()">
     <h1>Nybodahallen</h1>
-    <a href="https://sv.wikipedia.org/wiki/Nybodadep%C3%A5n" style="margin-botton: 1rem">Läs mer om Nybodahallen på Wikipedia</a>
-    <canvas id="webcam-canvas"></canvas>
+    <canvas id="webcam-canvas" width="960" height="720"></canvas>
+    <p>Välkommen till Nybodadepån - hjärtat av Stockholms tunnelbanenät! Denna imponerande depå, belägen i Liljeholmen, är hem för de moderna tunnelbanevagnar, typ C30, som trafikerar den röda linjen. Här möts skicklig underhåll och passion för kollektivtrafik, vilket håller Stockholm rullande, säkert och smidigt varje dag. Följ med oss på en närmare titt in i den pulserande världen av tunnelbanedrift! &nbsp; <a href="https://sv.wikipedia.org/wiki/Nybodadep%C3%A5n">Läs mer om Nybodahallen på Wikipedia</a></p>
 </body>
 </html>
