@@ -11,7 +11,7 @@ def capture_image():
 
     while True:
         subprocess.run(command, check=True)
-        time.sleep(15)
+        time.sleep(10)
 
 @app.route('/')
 def serve_index():
