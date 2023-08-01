@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta name="viewport" content="initial-scale=1" />
     <title>Nybodahallen</title>
@@ -8,7 +9,8 @@
             font-family: "SL";
             src: url(/sl.ttf);
         }
-        *{
+
+        * {
             font-family: 'SL', sans-serif;
             color: white;
         }
@@ -20,22 +22,37 @@
             align-items: center;
             background: #000;
         }
+
         #webcam-canvas {
             max-width: 80%;
             height: auto;
             margin: 2rem;
         }
-        p{
+
+        p {
             max-width: 960px;
             text-align: justify;
             font-size: 20px;
             margin: 2rem;
             line-height: 1.2;
         }
+
+        a {
+            white-space: nowrap;
+        }
+
         @media (max-width: 960px) {
-            p{
+            p {
                 text-align: left;
                 font-size: 18px;
+            }
+
+            body {
+                height: 100vh;
+                box-sizing: border-box;
+                justify-content: space-between;
+                padding: 2rem 0;
+
             }
         }
     </style>
@@ -44,7 +61,7 @@
             var now = new Date();
             var img = new Image();
             img.src = "/output.png?" + now.getTime();
-            img.onload = function() {
+            img.onload = function () {
                 var canvas = document.getElementById('webcam-canvas');
                 var ctx = canvas.getContext('2d');
                 canvas.width = img.width;
@@ -55,9 +72,14 @@
         setInterval(updateImage, 5000);
     </script>
 </head>
+
 <body onload="updateImage()">
     <h1>Nybodahallen</h1>
     <canvas id="webcam-canvas" width="960" height="720"></canvas>
-    <p>Välkommen till Nybodadepån - hjärtat av Stockholms tunnelbanenät! Denna imponerande depå, belägen i Liljeholmen, är hem för de moderna tunnelbanevagnar, typ C30, som trafikerar den röda linjen. Här möts skicklig underhåll och passion för kollektivtrafik, vilket håller Stockholm rullande, säkert och smidigt varje dag. &nbsp; <a href="https://sv.wikipedia.org/wiki/Nybodadep%C3%A5n">Läs mer om Nybodahallen på Wikipedia</a></p>
+    <p>Välkommen till Nybodadepån - hjärtat av Stockholms tunnelbanenät! Denna imponerande depå, belägen i Liljeholmen,
+        är hem för de moderna tunnelbanevagnar, typ C30, som trafikerar den röda linjen. Här möts skicklig underhåll och
+        passion för kollektivtrafik, vilket håller Stockholm rullande, säkert och smidigt varje dag. &nbsp; <a
+            href="https://sv.wikipedia.org/wiki/Nybodadep%C3%A5n">Läs mer om Nybodahallen på Wikipedia</a></p>
 </body>
+
 </html>
