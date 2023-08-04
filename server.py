@@ -3,6 +3,7 @@ import threading
 import time
 from flask import Flask, send_file, send_from_directory
 import datetime
+import sys
 
 app = Flask(__name__, static_folder='/home/pi/hallen')
 latest_image_path = "/home/pi/hallen/output.png"
@@ -14,8 +15,8 @@ def capture_image():
         start = datetime.datetime.now()
         subprocess.run(command, check=True)
         end = datetime.datetime.now()
-        print("Captured image in " + str((end-start).total_seconds()) + " seconds")
-        time.sleep(10)
+        print("Captured image in " + str((end-start).total_seconds()) + " seconds", file=sys.stderr)
+        time.sleep(1)
 
 @app.route('/')
 def serve_index():
