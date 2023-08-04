@@ -2,6 +2,7 @@ import subprocess
 import threading
 import time
 from flask import Flask, send_file, send_from_directory
+import datetime
 
 app = Flask(__name__, static_folder='/home/pi/hallen')
 latest_image_path = "/home/pi/hallen/output.png"
@@ -10,7 +11,10 @@ def capture_image():
     command = ["fswebcam", "--title", "nybodahallen.se","--line-colour", "#00000000", "--banner-colour", "#00000000", "--font", "/home/pi/hallen/sl.ttf:10", "--no-shadow", "--timestamp", "%Y-%m-%d %H:%M:%S", "--quiet", "--delay", "1", "--resolution", "960x720", latest_image_path]
 
     while True:
+        start = datetime.datetime.now()
         subprocess.run(command, check=True)
+        end = datetime.datetime.now()
+        print("Captured image in " + str((end-start).total_seconds()) + " seconds")
         time.sleep(10)
 
 @app.route('/')
