@@ -16,7 +16,7 @@ def capture_image():
         subprocess.run(command, check=True)
         end = datetime.datetime.now()
         print("Captured image in " + str((end-start).total_seconds()) + " seconds", file=sys.stderr)
-        time.sleep(1)
+        time.sleep(15)
 
 @app.route('/')
 def serve_index():
