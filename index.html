@@ -3,6 +3,7 @@
 
 <head>
     <meta name="viewport" content="initial-scale=1" />
+    <meta charset="utf-8" />
     <title>Nybodahallen</title>
     <style>
         @font-face {
@@ -10,58 +11,39 @@
             src: url(/sl.ttf);
         }
 
-        * {
-            font-family: 'SL', sans-serif;
-            color: white;
-        }
-
         body {
+            background: #000;
+            font-family: 'SL', sans-serif;
+            color: #fff;
+            margin: 0;
             text-align: center;
+
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #000;
+            justify-content: space-between;
         }
 
-        #webcam-canvas {
-            max-width: 80%;
+        #webcam {
+            max-width: 100%;
             height: auto;
-            margin: 2rem;
-        }
-
-        p {
-            max-width: 960px;
-            text-align: justify;
-            font-size: 20px;
-            margin: 2rem;
-            line-height: 1.2;
         }
 
         a {
+            color: #fff;
             white-space: nowrap;
-        }
-
-        @media (max-width: 960px) {
-            p {
-                text-align: left;
-                font-size: 18px;
-            }
-
-            body {
-                height: 100vh;
-                box-sizing: border-box;
-                padding: 2rem 0;
-
-            }
+            opacity: 0.8;
         }
     </style>
     <script>
+        const base_url = "https://nybodahallen.se";
+
         function updateImage() {
             var now = new Date();
             var img = new Image();
-            img.src = "/output.png?" + now.getTime();
+            img.src = base_url + "/output.png?" + now.getTime();
             img.onload = function () {
-                var canvas = document.getElementById('webcam-canvas');
+                var canvas = document.getElementById('webcam');
                 var ctx = canvas.getContext('2d');
                 canvas.width = img.width;
                 canvas.height = img.height;
@@ -73,12 +55,13 @@
 </head>
 
 <body onload="updateImage()">
-    <h1>Nybodahallen</h1>
-    <canvas id="webcam-canvas" width="960" height="720"></canvas>
-    <p>Välkommen till Nybodadepån - hjärtat av Stockholms tunnelbanenät! Denna imponerande depå, belägen i Liljeholmen,
-        är hem för de moderna tunnelbanevagnar, typ C30, som trafikerar den röda linjen. Här möts skicklig underhåll och
-        passion för kollektivtrafik, vilket håller Stockholm rullande, säkert och smidigt varje dag. &nbsp; <a
-            href="https://sv.wikipedia.org/wiki/Nybodadep%C3%A5n">Läs mer om Nybodahallen på Wikipedia</a></p>
+    <canvas id="webcam" width="960" height="720"></canvas>
+    <div id="info">
+        <h1>Nybodahallen</h1>
+        <a href="https://sv.wikipedia.org/wiki/Nybodadep%C3%A5n" target="_blank" rel="noreferrer">
+            Läs mer om Nybodahallen på Wikipedia
+        </a>
+    </div>
 </body>
 
 </html>
