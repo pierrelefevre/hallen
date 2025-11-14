@@ -1,3 +1,3 @@
 # hallen
 
-Simple webcam python script
+Simple webcam server

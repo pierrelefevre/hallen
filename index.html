@@ -6,18 +6,12 @@
     <meta charset="utf-8" />
     <title>Nybodahallen</title>
     <style>
-        @font-face {
-            font-family: "SL";
-            src: url(/sl.ttf);
-        }
-
         body {
             background: #000;
-            font-family: 'SL', sans-serif;
+            font-family: sans-serif;
             color: #fff;
             margin: 0;
             text-align: center;
-
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -29,58 +23,38 @@
             max-height: 100vh;
             height: auto;
         }
-
-        a {
-            color: #fff;
-            white-space: nowrap;
-            opacity: 0.8;
-        }
     </style>
     <script>
-        function updateWeather() {
-            const stockholmCoordinates = { latitude: 59.3052848, longitude: 18.0117193 };
-            const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${stockholmCoordinates.latitude}&longitude=${stockholmCoordinates.longitude}&current_weather=true&hourly=temperature_2m`;
+        const BASE_URL = "https://nybodahallen.se"
 
-            fetch(apiUrl)
+        const updateWeather = () => {
+            fetch(`https://api.open-meteo.com/v1/forecast?latitude=59.305&longitude=18.011&current_weather=true&hourly=temperature_2m`)
                 .then(response => response.json())
-                .then(weatherData => {
-                    const temp = weatherData.hourly.temperature_2m
-                    const tempVal = temp[temp.length - 1]
-
-                    document.getElementById('temp').innerHTML = tempVal + "°C";
-                })
-                .catch(error => {
-                    console.error('Error fetching weather data:', error);
-                });
+                .then(weatherData => { document.getElementById('temp').innerHTML = `${weatherData.current_weather.temperature}°C` })
+                .catch(error => { console.error('Error fetching weather data:', error) })
         }
 
-        const base_url = "https://nybodahallen.se";
-
-        function updateImage() {
-            updateWeather();
-            var now = new Date();
-            var img = new Image();
-            img.src = base_url + "/output.png?" + now.getTime();
-            img.onload = function () {
-                var canvas = document.getElementById('webcam');
-                var ctx = canvas.getContext('2d');
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0, img.width, img.height);
-            };
+        const updateImage = () => {
+            updateWeather()
+            let now = new Date()
+            let img = new Image()
+            img.src = BASE_URL + "/output.png?" + now.getTime()
+            img.onload = () => {
+                let canvas = document.getElementById('webcam')
+                let ctx = canvas.getContext('2d')
+                canvas.width = img.width
+                canvas.height = img.height
+                ctx.drawImage(img, 0, 0, img.width, img.height)
+            }
         }
-        setInterval(updateImage, 10000);
+        setInterval(updateImage, 5000)
     </script>
 </head>
 
 <body onload="updateImage()">
     <canvas id="webcam" width="960" height="720"></canvas>
     <div id="info">
-        <h1>Nybodahallen</h1>
-        <p id="temp"></p>
-        <a href="https://sv.wikipedia.org/wiki/Nybodadep%C3%A5n" target="_blank" rel="noreferrer">
-            Läs mer om Nybodahallen på Wikipedia
-        </a>
+        <h1>Nybodahallen <span id="temp"></span></h1>
     </div>
 </body>
 
